@@ -1,0 +1,253 @@
+name: CellDoors
+version: 2.2
+main: dev.lsdmc.edencells.EdenCells
+api-version: 1.21
+depend: [AdvancedRegionMarket]
+softdepend: [Vault, Citizens, PlaceholderAPI, LuckPerms]
+description: Cell door management and region integration
+author: Nenf
+
+commands:
+  edencells:
+    description: Main plugin command
+    usage: |
+      /edencells reload - Reload the plugin configuration
+  econfig:
+    description: Manage EdenCells configuration
+    usage: |
+      /econfig <get|set|list|reload|save|help> [args...]
+      get <path> - Get a config value
+      set <path> <value> - Set a config value
+      list [section] - List config options
+      reload - Reload configuration
+      save - Save all configurations
+      help - Show help message
+  esecurity:
+    description: Manage security settings
+    usage: |
+      /esecurity <ratelimits|audit|clearrate|validation|help> [args...]
+      ratelimits - View or set rate limits
+      audit - Manage audit logging
+      clearrate <player> - Clear player's rate limits
+      validation - View validation settings
+      help - Show help message
+  door:
+    description: Manage cell doors
+    usage: |
+      /door <open|close|scan|locate|link|unlink|info|help> [region]
+      open - Open a cell door
+      close - Close a cell door
+      scan - Scan for nearby doors
+      locate - Find a specific door
+      link - Link a door to a region
+      unlink - Unlink a door from a region
+      info - View door information
+      help - Show this help message
+  cell:
+    description: Manage cells and cell groups
+    usage: |
+      /cell <info|purchase|members|reset|help> [region]
+      info - View cell information
+      purchase - Purchase a cell
+      members - Manage cell members
+      reset - Reset a cell
+      help - Show this help message
+  cellgroup:
+    description: Manage cell groups
+    usage: |
+      /cellgroup <create|delete|add|bulkadd|remove|list|listall|info|help> [name] [args...]
+      create <name> [displayName] - Create a new cell group
+      delete <name> - Delete a cell group
+      add <group> <regionId> - Add region to group
+      bulkadd <group> <pattern> - Add multiple regions by pattern (e.g., jcell*, jcell1-50)
+      remove <group> <regionId> - Remove region from group
+      list <group> - List regions in group
+      listall - List all cell groups
+      info <group> - Show group information
+      help - Show this help message
+  teleportnpc:
+    description: Manage teleport NPCs
+    usage: |
+      /teleportnpc <create|remove|setgroup|list|reload> [args...]
+      create <name> <cellgroup> - Create teleport NPC at your location
+      setgroup <id> <cellgroup> - Set existing NPC as teleport for group
+      remove <id> - Remove a teleport NPC
+      list - List all teleport NPCs
+      reload - Reload teleport NPCs
+      help - Show this help message
+
+  ecadmin:
+    description: CellDoors admin dashboard
+    usage: |
+      /ecadmin [dashboard|players]
+      dashboard - Open admin panel
+      players - Manage players & cells
+
+permissions:
+  
+  edencells.admin:
+    description: Full admin access to all EdenCells features
+    default: op
+    children:
+      edencells.admin.doors: true
+      edencells.admin.cells: true
+      edencells.admin.groups: true
+      edencells.admin.config: true
+      edencells.admin.security: true
+      edencells.admin.teleportnpc: true
+      edencells.reload: true
+      edencells.door.link: true
+      edencells.bypass: true
+
+  edencells.admin.doors:
+    description: Admin access to door management
+    default: op
+
+  edencells.admin.cells:
+    description: Admin access to cell management
+    default: op
+
+  edencells.admin.groups:
+    description: Admin access to cell group management
+    default: op
+
+  edencells.admin.config:
+    description: Admin access to configuration commands
+    default: op
+
+  edencells.admin.security:
+    description: Admin access to security commands
+    default: op
+
+  edencells.admin.teleportnpc:
+    description: Admin access to teleport NPC management
+    default: op
+
+  edencells.admin.dashboard:
+    description: Access to admin panel and tools
+    default: op
+
+  
+  edencells.use:
+    description: Basic access to EdenCells features
+    default: true
+    children:
+      edencells.cell.info: true
+      edencells.cell.list: true
+      edencells.cell.gui: true
+
+  edencells.reload:
+    description: Reload the plugin configuration
+    default: op
+
+  
+  edencells.cell.info:
+    description: View cell information
+    default: true
+
+  edencells.cell.list:
+    description: List available cells
+    default: true
+
+  edencells.cell.gui:
+    description: Open cell GUI
+    default: true
+
+  edencells.cell.addmember:
+    description: Add members to owned cells
+    default: true
+
+  edencells.cell.removemember:
+    description: Remove members from owned cells
+    default: true
+
+  edencells.cell.available:
+    description: View available cells for purchase
+    default: true
+
+  edencells.cell.teleport:
+    description: Teleport to owned cells
+    default: true
+
+  edencells.cell.purchase:
+    description: Purchase cells
+    default: true
+
+  edencells.cell.sell:
+    description: Sell owned cells
+    default: true
+
+  
+  edencells.npc.teleport:
+    description: Use teleport NPCs for all cell groups
+    default: false
+
+  edencells.npc.teleport.*:
+    description: Wildcard permission to use all teleport NPCs
+    default: false
+
+  
+  edencells.door.link:
+    description: Link doors to cells
+    default: op
+
+  
+  edencells.bypass:
+    description: Bypass all restrictions
+    default: op
+    children:
+      edencells.bypass.limits: true
+      edencells.bypass.cooldown: true
+      edencells.bypass.payment: true
+      edencells.bypass.ratelimit: true
+
+  edencells.bypass.limits:
+    description: Bypass cell limits
+    default: op
+
+  edencells.bypass.cooldown:
+    description: Bypass teleport cooldowns
+    default: op
+
+  edencells.bypass.payment:
+    description: Bypass payment requirements
+    default: op
+
+  edencells.bypass.ratelimit:
+    description: Bypass all rate limits
+    default: op
+    children:
+      edencells.bypass.ratelimit.purchase: true
+      edencells.bypass.ratelimit.member: true
+      edencells.bypass.ratelimit.door: true
+      edencells.bypass.ratelimit.gui: true
+      edencells.bypass.ratelimit.npc: true
+
+  
+  edencells.bypass.ratelimit.purchase:
+    description: Bypass purchase rate limit
+    default: op
+
+  edencells.bypass.ratelimit.member:
+    description: Bypass member management rate limit
+    default: op
+
+  edencells.bypass.ratelimit.door:
+    description: Bypass door interaction rate limit
+    default: op
+
+  edencells.bypass.ratelimit.gui:
+    description: Bypass GUI open rate limit
+    default: op
+
+  edencells.bypass.ratelimit.npc:
+    description: Bypass NPC interaction rate limit
+    default: op
+
+  
+  
+
+  
+  edencells.tips.advanced:
+    description: Receive advanced usage tips
+    default: false

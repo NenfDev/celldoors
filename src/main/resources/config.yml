@@ -1,0 +1,295 @@
+
+
+
+
+
+
+general:
+  
+  debug: false
+  
+  
+  locale: "en_US"
+
+
+
+
+messages:
+  
+  prefix: "<color:#9D4EDD>[CellDoors]</color> "
+  
+  
+  colors:
+    primary: "#9D4EDD"     
+    secondary: "#06FFA5"   
+    accent: "#FFB3C6"      
+    error: "#FF6B6B"       
+    success: "#51CF66"     
+    neutral: "#ADB5BD"     
+
+
+
+
+cells:
+  
+  max-per-player: 10
+  
+  
+  default-max-members: 5
+  
+  
+  sign-keywords:
+    - "[Cell]"
+    - "Cell"
+    - "Prison Cell"
+    - "[CellDoors]"
+  
+  
+  gui:
+    
+    items-per-page: 45
+    
+    default-sort: "name"
+    
+    show-prices: true
+    
+    show-expiration: true
+    
+    require-confirmation: true
+    
+    click-sounds: true
+
+
+
+
+economy:
+  
+  currency-symbol: "$"
+  currency-suffix: ""
+  
+  
+  members:
+    add-cost: 100.0      
+    remove-cost: 50.0    
+  
+  
+  fees:
+    
+    sell-fee-percent: 0.1
+    
+    listing-fee: 0.0
+
+
+
+
+
+
+
+
+
+
+
+
+teleportation:
+  
+  enabled: true
+  
+  
+  default-cost: 500.0
+  
+  
+  cooldown-seconds: 1
+  
+  
+  
+  
+  
+  
+  free-groups: []
+  
+  
+  sounds:
+    success: "ENTITY_ENDERMAN_TELEPORT"
+    denied: "ENTITY_VILLAGER_NO"
+    error: "BLOCK_NOTE_BLOCK_BASS"
+  
+  
+  messages:
+    no_permission: "<color:#FF6B6B>You are not allowed to use this teleporter.</color>"
+    not_owner_in_group: "<color:#FF6B6B>You don't own a cell in <color:#FFB3C6>%group%</color></color>"
+    economy_missing: "<color:#FF6B6B>Economy unavailable. Teleport is disabled.</color>"
+    insufficient_funds: "<color:#FF6B6B>You need <color:#FFB3C6>%cost%</color> to teleport.</color>"
+    charged: "<color:#51CF66>Charged <color:#FFB3C6>%cost%</color> for teleport to your cell in <color:#FFB3C6>%group%</color></color>"
+    teleported: "<color:#51CF66>Teleported to your cell in <color:#FFB3C6>%group%</color></color>"
+    cooldown: "<color:#FFB3C6>Slow down. Try again in <color:#FFB3C6>%seconds%s</color></color>"
+    disabled: "<color:#FF6B6B>Teleportation is currently disabled.</color>"
+
+  
+  base-cost: 50.0
+  require-payment: true
+  cooldown: 5
+  effects:
+    play-sound: true
+    sound: "entity.enderman.teleport"
+    show-particles: true
+    particle: "PORTAL"
+
+
+
+
+doors:
+  
+  valid-materials:
+    - IRON_DOOR
+    - OAK_DOOR
+    - SPRUCE_DOOR
+    - BIRCH_DOOR
+    - JUNGLE_DOOR
+    - ACACIA_DOOR
+    - DARK_OAK_DOOR
+    - CRIMSON_DOOR
+    - WARPED_DOOR
+    - IRON_TRAPDOOR
+
+  
+  sounds:
+    enabled: true
+    open-sound: "block.iron_door.open"
+    close-sound: "block.iron_door.close"
+    volume: 1.0
+    pitch: 1.0
+
+  
+  auto-close-delay: 0
+
+
+
+
+security:
+  
+  rate-limits:
+    cell-purchase: 3
+    member-add: 5
+    member-remove: 5
+    door-interact: 20
+    gui-open: 10
+    npc-interact: 10
+    bulk-add: 2  
+
+  
+  validation:
+    
+    max-region-id-length: 32
+    
+    region-id-pattern: "^[a-zA-Z0-9_-]+$"
+    
+    max-transaction: 1000000.0
+
+  
+  audit:
+    
+    enabled: true
+    
+    log-file: "logs/audit.log"
+    
+    log-actions:
+      - "cell_purchase"
+      - "cell_sell"
+      - "member_add"
+      - "member_remove"
+      - "door_link"
+      - "npc_teleport"
+
+
+
+
+integrations:
+  
+  arm:
+    
+    
+    
+    
+    
+    
+    use-arm-economy: true
+    
+    sync-data: true
+    
+    check-permissions: true
+
+  
+  citizens:
+    
+    enabled: true
+    
+    npc-name-format: "<color:#06FFA5><bold>Cell Teleporter</bold></color>"
+    
+    npc-skin: "Notch"
+
+  
+  worldguard:
+  
+  luckperms:
+    
+    
+    force-group-permissions: false
+    
+    group-prefix: "group:"
+    
+    check-regions: true
+    
+    respect-flags: true
+
+
+
+
+performance:
+  
+  cache:
+    
+    player-cache-time: 5
+    
+    region-cache-time: 10
+    
+    max-cache-size: 1000
+
+  
+  async:
+    
+    async-saves: true
+    
+    async-economy: true
+    
+    thread-pool-size: 4
+
+
+
+
+maintenance:
+  
+  auto-save-interval: 5
+
+  
+  backup:
+    
+    enabled: false
+    
+    interval: 24
+    
+    max-backups: 7
+    
+    folder: "backups"
+
+  
+  cleanup:
+    
+    remove-expired-rentals: true
+    
+    audit-log-retention: 30
+    
+    clean-orphaned-doors: true
+
+
+
+config-version: 3

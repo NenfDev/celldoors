@@ -1,0 +1,113 @@
+
+
+
+
+
+
+
+
+
+groups:
+  
+  jcells:
+    display-name: "J Ward Cells"
+    regions: []  
+    
+    
+    cell-limit: 1  
+    teleport-cost: 250.0  
+    permission: "edencells.ward.j"  
+    
+    
+    
+
+  
+  icells:
+    display-name: "I Ward Cells"
+    regions: []  
+    cell-limit: 1  
+    teleport-cost: 200.0
+    permission: "edencells.ward.i"
+
+  
+  hcells:
+    display-name: "H Ward Cells"
+    regions: []  
+    cell-limit: 1  
+    teleport-cost: 150.0
+    permission: "edencells.ward.h"
+
+  
+  gcells:
+    display-name: "G Ward Cells"
+    regions: []  
+    cell-limit: 1  
+    teleport-cost: 100.0
+    permission: "edencells.ward.g"
+
+  
+  fcells:
+    display-name: "F Ward Cells"
+    regions: []  
+    cell-limit: 1  
+    teleport-cost: 75.0
+    permission: "edencells.ward.f"
+
+  
+  ecells:
+    display-name: "E Ward Cells"
+    regions: []  
+    cell-limit: 1  
+    teleport-cost: 50.0
+    permission: "edencells.ward.e"
+
+  
+  dcells:
+    display-name: "D Ward Cells"
+    regions: []  
+    cell-limit: 1  
+    teleport-cost: 25.0
+    permission: "edencells.ward.d"
+
+  
+  ccells:
+    display-name: "C Ward Cells"
+    regions: []  
+    cell-limit: 1  
+    teleport-cost: 10.0
+    permission: "edencells.ward.c"
+
+  
+  bcells:
+    display-name: "B Ward Cells"
+    regions: []  
+    cell-limit: 1  
+    teleport-cost: 5.0
+    permission: "edencells.ward.b"
+
+  
+  acells:
+    display-name: "A Ward Cells"
+    regions: []  
+    cell-limit: 1  
+    teleport-cost: 0.0  
+    permission: "edencells.ward.a"
+
+  
+  vipcells:
+    display-name: "VIP Cells"
+    regions: []  
+    cell-limit: 1  
+    teleport-cost: 0.0  
+    permission: "edencells.group.vip"
+    
+    
+    
+
+
+limits:
+  
+  global: 15  
+
+
+version: 1
